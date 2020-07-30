@@ -1,0 +1,23 @@
+stages:
+  prepare:
+    cmd: python src/prepare.py -x movie_reviews/train -y movie_reviews/test -p mr_train.txt
+      -q mr_test.txt
+    deps:
+    - movie_reviews
+    - src/prepare.py
+    outs:
+    - mr_test.txt
+    - mr_train.txt
+  train:
+    cmd: python src/train.py -f mr_train.txt -g model.bin -v mr_test.txt
+    deps:
+    - mr_test.txt
+    - mr_train.txt
+    - src/train.py
+    outs:
+    - model.bin
+  evaluate:
+    cmd: python src/evaluate.py -m model.bin -t mr_test.txt
+    deps:
+    - model.bin
+    - src/evaluate.py

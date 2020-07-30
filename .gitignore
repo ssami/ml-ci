@@ -1,2 +1,7 @@
+.idea/*
+
 .ipynb_checkpoints/*
 /movie_reviews
+/mr_train.txt
+/mr_test.txt
+/model.bin

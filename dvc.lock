@@ -1,0 +1,32 @@
+prepare:
+  cmd: python src/prepare.py -x movie_reviews/train -y movie_reviews/test -p mr_train.txt
+    -q mr_test.txt
+  deps:
+  - path: movie_reviews
+    md5: aa29c290d14e75d449028e367e5a17aa.dir
+  - path: src/prepare.py
+    md5: c4665495094b561ee6705978382caad8
+  outs:
+  - path: mr_test.txt
+    md5: a0ecdeef96e55f1e487046a663db2ff9
+  - path: mr_train.txt
+    md5: 1b5944a584b4e55a8fcdd5e8d86161cc
+train:
+  cmd: python src/train.py -f mr_train.txt -g model.bin -v mr_test.txt
+  deps:
+  - path: mr_test.txt
+    md5: a0ecdeef96e55f1e487046a663db2ff9
+  - path: mr_train.txt
+    md5: 1b5944a584b4e55a8fcdd5e8d86161cc
+  - path: src/train.py
+    md5: aed53854ce7422abff0c1203bfc64a79
+  outs:
+  - path: model.bin
+    md5: c766f67e1c5228276f343214ac3515df
+evaluate:
+  cmd: python src/evaluate.py -m model.bin -t mr_test.txt
+  deps:
+  - path: model.bin
+    md5: c766f67e1c5228276f343214ac3515df
+  - path: src/evaluate.py
+    md5: 3880857281137ec34aafdfadff2b26da
