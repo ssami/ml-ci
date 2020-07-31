@@ -24,9 +24,12 @@ train:
   - path: model.bin
     md5: c766f67e1c5228276f343214ac3515df
 evaluate:
-  cmd: python src/evaluate.py -m model.bin -t mr_test.txt
+  cmd: python src/evaluate.py -m model.bin -t mr_test.txt -j metrics.json
   deps:
   - path: model.bin
     md5: c766f67e1c5228276f343214ac3515df
   - path: src/evaluate.py
-    md5: 3880857281137ec34aafdfadff2b26da
+    md5: 999ac309caec88f34eac10ebfb587deb
+  outs:
+  - path: metrics.json
+    md5: ada9de7d8425439f4b7e45dbed021f63
